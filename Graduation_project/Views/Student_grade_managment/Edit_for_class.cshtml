@@ -1,0 +1,119 @@
+﻿@model IEnumerable<Students>
+
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учні класу @ViewBag.ClassName</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+
+        h2 {
+            color: #00796b;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #b2dfdb;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #00796b;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #e0f7fa;
+        }
+
+        tr:hover {
+            background-color: #b2ebf2;
+        }
+
+        .btn-action {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+            .btn-action:hover {
+                background-color: #004d40;
+            }
+    </style>
+</head>
+<body>
+    <h2>Учні @ViewBag.ClassName класу</h2>
+    @if (Model != null && Model.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Прізвище</th>
+                    <th>Ім'я</th>
+                    <th>Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <td>@student.Surname_student</td>
+                        <td>@student.Name_student</td>
+                        <td>
+                            <form action="Add_grade" method="get" style="display:inline;">
+                                <input type="hidden" name="student_id" value="@student.ID_student" />
+                                <button type="submit" class="btn-action" title="Додати оцінку">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </form>
+                            <form action="Edit_grades" method="get" style="display:inline;">
+                                <input type="hidden" name="student_id" value="@student.ID_student" />
+                                <button type="submit" class="btn-action" title="Редагувати оцінку">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                            </form>
+                            <form action="View_grades" method="get" style="display:inline;">
+                                <input type="hidden" name="student_id" value="@student.ID_student" />
+                                <button type="submit" class="btn-action" title="Переглянути тематичні та семестрові">
+                                    <i class="fas fa-chart-bar"></i>
+                                </button>
+                            </form>
+                            <form action="Mark_attendance" method="get" style="display:inline;">
+                                <input type="hidden" name="student_id" value="@student.ID_student" />
+                                <button type="submit" class="btn-action" title="Відмітити відвідуваність">
+                                    <i class="fas fa-user-check"></i>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p style="text-align:center; color:red;">Немає учнів у цьому класі.</p>
+    }
+</body>
+</html>

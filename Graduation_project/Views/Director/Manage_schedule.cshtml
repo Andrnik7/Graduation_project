@@ -1,0 +1,188 @@
+﻿@model Schedule_view
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Редактор розкладу</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        h1, h3 {
+            color: #00796b;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            border: 1px solid #b2dfdb;
+            border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #f1f8e9;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #00796b;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+            .btn-primary:hover {
+                background-color: #004d40;
+            }
+
+        .table {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+            .table th {
+                background-color: #00796b;
+                color: #ffffff;
+            }
+
+            .table td {
+                vertical-align: middle;
+                border-bottom: 1px solid #b2dfdb;
+            }
+
+        .divider {
+            height: 2px;
+            background-color: #00796b;
+            margin: 10px 0;
+            width: 100%;
+        }
+
+        .table input.form-control {
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .table select.form-control {
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .lesson-number {
+            text-align: center;
+            font-weight: bold;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <form asp-action="SaveSchedule" method="post">
+        <div class="container mt-5">
+            <h1 class="text-center">Редактор розкладу</h1>
+            <div class="form-group">
+                <label for="classSelect">Оберіть клас:</label>
+                <select id="classSelect" class="form-control" name="class_id">
+                    <option value="">-- Виберіть клас --</option>
+                    @foreach (var classItem in Model.Classes)
+                    {
+                        <option value="@classItem.ID_class">@classItem.name_class</option>
+                    }
+                </select>
+            </div>
+            <h3 class="text-center">Розклад уроків</h3>
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Час</th>
+                        <th>Понеділок</th>
+                        <th>Вівторок</th>
+                        <th>Середа</th>
+                        <th>Четвер</th>
+                        <th>Пʼятниця</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < 5; i++)
+                    {
+                        <tr>
+                            <td class="lesson-number">@($"Пара {i + 1}")</td>
+                            @for (int j = 0; j < 5; j++)
+                            {
+                                <td>
+                                    <input type="text" class="form-control" name="lessons[@i][@j].Subject"
+                                           placeholder="Предмет" oninput="filterTeachers(this, 'teacherSelect_@(i)_@(j)')" />
+                                    <select id="teacherSelect_@(i)_@(j)" class="form-control mt-2" name="lessons[@i][@j].TeacherId">
+                                        <option value="">Вчитель</option>
+                                    </select>
+
+                                </td>
+                            }
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <div class="divider"></div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary btn-block">Зберегти розклад</button>
+        </div>
+    </form>
+    <script>
+        const teachers = @Html.Raw(Json.Serialize(Model.Teachers));
+
+        function filterTeachers(subjectInput, selectId) {
+            const subject = subjectInput.value.toLowerCase();
+            const teacherSelect = document.getElementById(selectId);
+            teacherSelect.innerHTML = '<option value="">Вчитель</option>';
+            const filteredTeachers = teachers.filter(teacher => {
+                const teacherSubject = teacher.subject ? teacher.subject.toLowerCase() : ''; 
+                return teacherSubject === subject; 
+            });
+            filteredTeachers.forEach(teacher => {
+                const option = document.createElement('option');
+                option.value = teacher.ID_teacher;
+                option.text = `${teacher.surname_teacher} ${teacher.name_teacher} ${teacher.middleName_teacher}`;
+                teacherSelect.appendChild(option);
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('classSelect').addEventListener('change', function () {
+                document.querySelectorAll('input[type="text"]').forEach(function (input) {
+                    input.value = ''; 
+                });
+                document.querySelectorAll('select').forEach(function (select) {
+                    if (select.id !== 'classSelect') {
+                        select.innerHTML = '<option value="">Вчитель</option>'; 
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

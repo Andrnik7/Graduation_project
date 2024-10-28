@@ -1,0 +1,49 @@
+﻿@model Teachers
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="~/css/style_settings.css" />
+    <title>Director Dashboard</title>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Директор</h1>
+        <h1>@Model.Name_teacher @Model.MiddleName_teacher @Model.Surname_teacher</h1>
+        <h2>Панель управління</h2>
+    </div>
+    <div class="dashboard-container">
+        <div class="dashboard-block">
+            <a href="@Url.Action("ManageClasses", "Director")">
+                <i class="fas fa-chalkboard-teacher"></i>
+            </a>
+            <h3>Управління класами</h3>
+            <p>Редагувати списки класів</p>
+        </div>
+        <div class="dashboard-block">
+            <a href="@Url.Action("ManageTeachers", "Director")">
+                <i class="fas fa-users"></i>
+            </a>
+            <h3>Управління вчителями</h3>
+            <p>Додати або видалити вчителів</p>
+        </div>
+        <div class="dashboard-block">
+            <a href="@Url.Action("Manage_schedule", "Director")">
+                <i class="fas fa-calendar-alt"></i>
+            </a>
+            <h3>Управління розкладом</h3>
+            <p>Редагувати розклад</p>
+        </div>
+        <div class="dashboard-block">
+            <a href="@Url.Action("OtherSettings", "Director")">
+                <i class="fas fa-cogs"></i>
+            </a>
+            <h3>Інші функції</h3>
+            <p>Налаштування та додаткові опції</p>
+        </div>
+    </div>
+</body>
+</html>

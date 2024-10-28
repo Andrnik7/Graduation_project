@@ -1,0 +1,86 @@
+﻿@model Students
+
+@{
+    ViewData["Title"] = "Register New Student";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style_registration.css" />
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="welcome-title">Register New Student</h2>
+        <form asp-controller="Login" asp-action="Sign_in" method="post" class="login-form" id="registration-form">
+            <div class="form-group">
+                <label asp-for="Name_student" class="form-label">First Name</label>
+                <input asp-for="Name_student" class="form-input" type="text" placeholder="Enter student's first name" />
+                <span asp-validation-for="Name_student" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Surname_student" class="form-label">Last Name</label>
+                <input asp-for="Surname_student" class="form-input" type="text" placeholder="Enter student's surname" />
+                <span asp-validation-for="Surname_student" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Form" class="form-label">Class</label>
+                <input asp-for="Form" class="form-input" type="text" placeholder="Enter student's class" />
+                <span asp-validation-for="Form" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Username" class="form-label">Username</label>
+                <input asp-for="Username" class="form-input" type="text" placeholder="Choose a username" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" class="form-input" type="password" placeholder="Choose a password" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <h2 class="welcome-title">Teacher's Account</h2>
+            <p class="verification-info">
+                To register a student, log in to your teacher account
+            </p>
+            <div class="form-group">
+                <label for="TeacherName" class="form-label">Teacher's First Name</label>
+                <input id="TeacherName" class="form-input" type="text" placeholder="Enter teacher's first name" />
+                <span id="teacherNameError" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="TeacherSurname" class="form-label">Teacher's Last Name</label>
+                <input id="TeacherSurname" class="form-input" type="text" placeholder="Enter teacher's surname" />
+                <span id="teacherSurnameError" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="TeacherUsername" class="form-label">Teacher's Username</label>
+                <input id="TeacherUsername" class="form-input" type="text" placeholder="Enter teacher's username" />
+                <span id="teacherUsernameError" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="TeacherPassword" class="form-label">Teacher's Password</label>
+                <input id="TeacherPassword" class="form-input" type="password" placeholder="Enter teacher's password" />
+                <span id="teacherPasswordError" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-login" id="verifyBtn">Verify and Register</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

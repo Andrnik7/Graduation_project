@@ -1,0 +1,105 @@
+﻿@model Students
+@{
+    ViewData["Title"] = "Welcome to Gradebook";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style_registration.css" />
+    <style>
+        .teacher-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #00796b;
+            display: flex;
+            align-items: center;
+        }
+
+        .triangle {
+            margin-left: 5px;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 6px solid #00796b;
+            transition: transform 0.3s ease;
+        }
+
+        .rotate {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: #e0f2f1;
+            border: 1px solid #004d40;
+            border-radius: 5px;
+            padding: 10px;
+            z-index: 10;
+        }
+
+            .dropdown-menu a {
+                display: block;
+                padding: 5px;
+                color: #004d40;
+                text-decoration: none;
+                font-size: 16px;
+            }
+
+                .dropdown-menu a:hover {
+                    background-color: #b2dfdb;
+                }
+    </style>
+    <script>
+        function toggleDropdownMenu() {
+            var dropdownMenu = document.getElementById("dropdownMenu");
+            var triangle = document.getElementById("triangle");
+            if (dropdownMenu.style.display === "none" || dropdownMenu.style.display === "") {
+                dropdownMenu.style.display = "block";
+                triangle.classList.add("rotate");
+            } else {
+                dropdownMenu.style.display = "none";
+                triangle.classList.remove("rotate");
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <span class="teacher-icon" onclick="toggleDropdownMenu()">👨‍🏫 <span id="triangle" class="triangle"></span></span>
+        <div id="dropdownMenu" class="dropdown-menu">
+            <a asp-controller="Student_grade_managment" asp-action="Sign_in_teacher">Увійти з акаунтом вчителя</a>
+            <a asp-controller="Director" asp-action="login_director">Увійти з акаунтом директора</a>
+        </div>
+        <h2 class="welcome-title">Ласкаво просимо в електронний журнал</h2>
+        <p>Будь ласка, увійдіть або зареєструйте нового учня</p>
+        <form asp-controller="Login" asp-action="login_to_account" method="post" class="login-form">
+            <div class="form-group">
+                <label asp-for="Username" class="form-label">Логін</label>
+                <input asp-for="Username" class="form-input" type="text" placeholder="Введіть свій логін" />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="form-label">Пароль</label>
+                <input asp-for="Password" class="form-input" type="password" placeholder="Введіть свій пароль" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn-login">Увійти</button>
+        </form>
+        <p class="register-text">Немає акаунту? Попросіть свого вчителя вас <a asp-controller="Login" asp-action="Verify_teacher" class="register-link">зареєструвати</a></p>
+    </div>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

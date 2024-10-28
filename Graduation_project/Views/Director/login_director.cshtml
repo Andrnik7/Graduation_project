@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Акаунт директора</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #b2dfdb 0%, #4db6ac 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: #e0f2f1;
+            border-radius: 10px;
+            padding: 35px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            width: 370px;
+            text-align: left;
+        }
+
+            .login-container h2 {
+                color: #00796b;
+                font-size: 22px;
+                margin-bottom: 25px;
+                font-weight: 600;
+                text-align: center;
+            }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: #004d40;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #80cbc4;
+            border-radius: 6px;
+            background-color: #f1f8e9;
+            font-size: 15px;
+            color: #004d40;
+            box-sizing: border-box;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+            .form-input:focus {
+                border-color: #26a69a;
+                outline: none;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+
+        .btn-login {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 17px;
+            width: 100%;
+            transition: background-color 0.3s, transform 0.2s;
+            margin-top: 10px;
+        }
+
+            .btn-login:hover {
+                background-color: #004d40;
+                transform: scale(1.02);
+            }
+
+        .text-danger {
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Увійдіть, щоб керувати базою електронного щоденника</h2>
+        <form asp-controller="Director" asp-action="Login_to_dashboard" method="post" class="login-form">
+            <div class="form-group">
+                <label for="Director_username" class="form-label">Логін</label>
+                <input id="Director_username" name="Director_username" class="form-input" type="text" placeholder="Введіть логін" />
+                <span class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Director_password" class="form-label">Пароль</label>
+                <input id="Director_password" name="Director_password" class="form-input" type="password" placeholder="Введіть пароль" />
+                <span class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn-login">Увійти</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

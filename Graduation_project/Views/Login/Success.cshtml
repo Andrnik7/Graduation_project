@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Рєстрація успішна";
+}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style_registration.css" /> 
+    <link rel="stylesheet" href="~/css/style_success.css" />
+</head>
+<body>
+    <div class="login-container">
+        <div class="success-message">Рєстрація успішна!</div>
+        <div class="verification-info">Ваш обліковий запис був успішно зареєстрований.</div>
+        <div class="links">
+            <a href="/Login/Sign_in" class="register-link">Повернутися на сторінку входу</a>
+            <a href="/Login/Register_student" class="register-link">Додати ще одного учня</a>
+        </div>
+    </div>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

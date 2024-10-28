@@ -1,0 +1,164 @@
+﻿@model IEnumerable<Class_list>
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редагування Оцінок</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom right, #e0f7fa, #b2ebf2);
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            width: 100%;
+        }
+
+        .sidebar {
+            width: 15%;
+            background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+            border-right: 1px solid #b2dfdb;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        .sidebar-header {
+            font-size: 18px;
+            font-weight: bold;
+            color: #00796b;
+            background-color: #ffcc33;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            text-align: center;
+            cursor: default; 
+            width: 100%;
+        }
+
+        .sidebar-option {
+            background-color: white;
+            color: #00796b;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer; 
+            transition: background-color 0.3s, color 0.3s;
+            width: 100%;
+        }
+
+            .sidebar-option:hover {
+                background-color: #00796b;
+                color: white;
+            }
+
+        .main-content {
+            width: 85%;
+            background: linear-gradient(to bottom, #ffffff, #b3e5fc);
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .content-wrapper {
+            width: 50%;
+            text-align: center;
+        }
+
+        .welcome-title {
+            color: #00796b;
+            margin-bottom: 20px;
+        }
+
+        .class-list {
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .subject-title {
+            color: #004d40;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .btn-login {
+            background-color: #00796b;
+            color: #ffffff;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 10px 20px;
+            width: 450px;
+            margin: 10px 0;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+            .btn-login:hover {
+                background-color: #004d40;
+                border-color: #ffffff;
+                box-shadow: 0 0 5px #004d40;
+            }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-header">Функції для вчителя</div>
+            <div class="sidebar-option"
+                 onclick="window.location.href='@Url.Action("Add_lesson", "Student_grade_managment", new { Subject = ViewBag.Subject, Teacher_ID = ViewBag.Teacher_ID })'">
+                Додати урок
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="content-wrapper">
+                <h2 class="welcome-title">Редагування Оцінок</h2>
+                <div class="subject-title">Предмет: @ViewBag.Subject</div>
+                <div class="class-list">
+                    @foreach (var classItem in Model)
+                    {
+                        if (ViewBag.Subject == "Біологія" && classItem.biology_teacher == int.Parse(ViewBag.Teacher_ID))
+                        {
+                            <form asp-action="Edit_for_class" method="get">
+                                <input type="hidden" name="class_name" value="@classItem.name_class" />
+                                <button type="submit" class="btn-login" name="className" value="@classItem.name_class">Клас @classItem.name_class</button>
+                            </form>
+                        }
+                        else if (ViewBag.Subject == "Математика" && classItem.math_teacher == int.Parse(ViewBag.Teacher_ID))
+                        {
+                            <form action="Edit_for_class" method="get">
+                                <input type="hidden" name="class_name" value="@classItem.name_class" />
+                                <button type="submit" class="btn-login" name="className" value="@classItem.name_class">Клас @classItem.name_class</button>
+                            </form>
+                        }
+                        else if (ViewBag.Subject == "Всесвітня історія" && classItem.world_history_teacher == int.Parse(ViewBag.Teacher_ID))
+                        {
+                            <form action="Edit_for_class" method="get">
+                                <input type="hidden" name="class_name" value="@classItem.name_class" />
+                                <button type="submit" class="btn-login" name="className" value="@classItem.name_class">Клас @classItem.name_class</button>
+                            </form>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

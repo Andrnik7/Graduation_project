@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Додати оцінку</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="~/css/animation.css" />
+</head>
+<body>
+    <i class="fas fa-graduation-cap icon-grade"></i>
+    <div class="form-container">
+        <h2 class="welcome-title">Додати оцінку</h2>
+        <div class="student-info">
+            <p>Прізвище учня: <strong>@ViewBag.StudentSurname</strong></p>
+        </div>
+
+        <form action="Add_grade" method="post">
+            <input type="hidden" name="student_id" value="@ViewBag.Student_ID" />
+
+            <div class="form-group">
+                <label for="gradeType" class="form-label">Тип оцінки:</label>
+                <select name="gradeType" id="gradeType" class="form-select" required>
+                    <option value="current_grade">Оцінка за урок</option>
+                    <option value="grade_for_test">Оцінка за тест</option>
+                    <option value="grade_for_individual_work">Оцінка за самостійну роботу</option>
+                    <option value="grade_for_control_work">Оцінка за контрольну роботу</option>
+                    <option value="grade_for_homework">Оцінка за домашню роботу</option>
+                    <option value="grade_for_practical_work">Оцінка за практичну роботу</option>
+                    <option value="thamatik_grade">Тематична оцінка</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="lessonSelect" class="form-label">Урок:</label>
+                <select name="lesson" id="lessonSelect" class="form-select" required>
+                    <option value="monday_lesson">Урок за понеділок</option>
+                    <option value="wednesday_lesson">Урок за середу</option>
+                    <option value="thursday_lesson">Урок за четвер</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date" class="form-label">Дата оцінки:</label>
+                <input type="date" name="date" id="date" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="grade" class="form-label">Оцінка:</label>
+                <input type="number" name="grade" id="grade" class="form-input" min="1" max="12" required/>
+            </div>
+
+            <button type="submit" class="btn-submit" title="Додати оцінку">Додати оцінку</button>
+        </form>
+
+        <div class="verification-info">
+            Всі поля є обов'язковими.
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = ('0' + (today.getMonth() + 1)).slice(-2);
+            const day = ('0' + today.getDate()).slice(-2);
+            const formattedDate = `${year}-${month}-${day}`;
+            document.getElementById("date").value = formattedDate;
+        });
+    </script>
+</body>
+</html>

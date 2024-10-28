@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "Teacher Login";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style_registration.css" />
+</head>
+<body>
+    <div class="login-container">
+        <h2 class="welcome-title">Вхід в акаунт вчителя</h2>
+        <p class="verification-info">
+           Будь ласка, зайдіть в свій вчительский акаунт, щоб зареєструвати нового учня
+            <form asp-controller="Login" asp-action="Check_teachers_credential" method="post" class="login-form" id="teacher-login-form">
+                <div class="form-group">
+                    <label for="TeacherName" class="form-label">Введіть своє ім'я</label>
+                    <input id="TeacherName" name="TeacherName" class="form-input" type="text" placeholder="Введіть своє ім'я" />
+                    <span class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="TeacherSurname" class="form-label">Введіть своє прізвище</label>
+                    <input id="TeacherSurname" name="TeacherSurname" class="form-input" type="text" placeholder="Введіть своє прізвище" />
+                    <span class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="TeacherUsername" class="form-label">Ведіть логін</label>
+                    <input id="TeacherUsername" name="TeacherUsername" class="form-input" type="text" placeholder="Ведіть логін" />
+                    <span class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="TeacherPassword" class="form-label">Введіть пароль</label>
+                    <input id="TeacherPassword" name="TeacherPassword" class="form-input" type="password" placeholder=Введіть пароль" />
+                    <span class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn-login">Увійти</button>
+                </div>
+            </form>
+    </div>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

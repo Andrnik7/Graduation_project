@@ -1,0 +1,221 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 15%;
+    background: linear-gradient(to bottom, #e0f7fa, #b2ebf2);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+.floating-icon {
+    position: absolute;
+    font-size: 48px;
+    opacity: 0.8;
+    animation: move 6s linear infinite;
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(30px, -20px) rotate(45deg);
+    }
+
+    50% {
+        transform: translate(-30px, 20px) rotate(-45deg);
+    }
+
+    75% {
+        transform: translate(20px, 30px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
+
+.icon-1 {
+    color: #ffab40;
+    animation-delay: 0s;
+    top: 10%;
+    left: 10%;
+}
+
+.icon-2 {
+    color: #3f51b5;
+    animation-delay: 1s;
+    top: 30%;
+    left: 20%;
+}
+
+.icon-3 {
+    color: #ff4081;
+    animation-delay: 2s;
+    top: 50%;
+    left: 40%;
+}
+
+.icon-4 {
+    color: #4caf50;
+    animation-delay: 3s;
+    top: 70%;
+    left: 60%;
+}
+
+.icon-5 {
+    color: #f44336;
+    animation-delay: 4s;
+    top: 20%;
+    left: 80%;
+}
+.main-content {
+    width: 85%;
+    background: #ffffff;
+    padding: 20px 40px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tab-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.btn-copy-lesson, .btn-return {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #00796b;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .btn-copy-lesson:hover {
+        background-color: #004d40;
+    }
+
+    .btn-return:hover {
+        background-color: #00695c;
+    }
+
+.form-wrapper {
+    max-width: 800px;
+    width: 100%;
+    background: #fafafa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.form-title {
+    color: #00796b;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.form-field {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+}
+
+.form-input, .form-select, .form-textarea, .form-number {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #b2dfdb;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus, .form-number:focus {
+        border-color: #00796b;
+        outline: none;
+    }
+
+.form-textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.attendance-title {
+    font-size: 20px;
+    color: #004d40;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.attendance-grades-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    table-layout: fixed; 
+}
+
+ .attendance-grades-table {
+    width: 100%; 
+    max-width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    table-layout: fixed; 
+}
+
+.attendance-grades-table th, .attendance-grades-table td {
+    padding: 10px; 
+    border: 1px solid #b2dfdb;
+    text-align: center;
+    font-size: 14px;
+    min-width: 120px; 
+    word-wrap: break-word; 
+}
+
+.form-checkbox {
+    transform: scale(1.2);
+}
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #00796b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+    .btn-submit:hover {
+        background-color: #004d40;
+    }

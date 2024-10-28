@@ -1,0 +1,190 @@
+﻿@using Graduation_project.Controllers
+@model Student_grade_managmentController.AddLessonViewModel
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="~/css/style_add_lesson.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Додати Урок</title>
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <i class="fas fa-pencil-alt floating-icon icon-1"></i>
+            <i class="fas fa-ruler floating-icon icon-2"></i>
+            <i class="fas fa-book floating-icon icon-3"></i>
+            <i class="fas fa-file-alt floating-icon icon-4"></i>
+            <i class="fas fa-clipboard floating-icon icon-5"></i>
+        </div>
+        <div class="main-content">
+            <div class="tab-buttons">
+                <button type="button" class="btn-copy-lesson">Підтягнути інформацію з уроку іншого класу</button>
+                <button type="button" class="btn-return">Повернутися на головну</button>
+            </div>
+            <div class="form-wrapper">
+                <h2 class="form-title">Додати Урок</h2>
+
+                <div class="form-field">
+                    <label class="form-label">Предмет</label>
+                    <input type="text" class="form-input" value="@Model.Subject" disabled />
+                </div>
+
+                <div class="form-field">
+                    <label class="form-label">Вибрати клас</label>
+                    <select id="class-select" class="form-select" onchange="filterStudents()">
+                        <option value="">Виберіть клас</option>
+                        @foreach (var classItem in Model.Classes)
+                        {
+                            <option value="@classItem.ID_class,@classItem.name_class">@classItem.name_class</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label class="form-label">Дата уроку</label>
+                    <input type="date" id="lesson-date" class="form-input" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                </div>
+
+                <span class="or">Або</span>
+
+                <div class="form-field">
+                    <label class="form-label">Вибрати урок з поточного тижня</label>
+                    <select id="lesson-select" class="form-select">
+                        <option value="">Виберіть урок</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label class="form-label">Тема Уроку</label>
+                    <input type="text" class="form-input" placeholder="Введіть тему уроку" />
+                </div>
+
+                <div class="form-field">
+                    <label class="form-label">Домашнє завдання</label>
+                    <textarea class="form-textarea" placeholder="Введіть домашнє завдання на наступний урок"></textarea>
+                </div>
+
+                <div id="students-section">
+                    <div id="no-class-selected" style="display: none; text-align: center; font-size: 16px;">
+                        Клас не вибраний
+                    </div>
+                    <h3 class="attendance-title">Відвідування та Оцінки</h3>
+                    <table class="attendance-grades-table" id="students-table" style="display: none;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Учень</th>
+                                <th>Відвідування</th>
+                                <th>Тип оцінки</th>
+                                <th>Оцінка як</th>
+                                <th>Не враховувати</th>
+                                <th>Оцінка</th>
+                            </tr>
+                        </thead>
+                        <tbody id="students-body">
+                        </tbody>
+                    </table>
+                </div>
+                <button type="submit" class="btn-submit">Зберегти урок</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var students = @Html.Raw(Json.Serialize(Model.Students));
+        var schedules = @Html.Raw(Json.Serialize(Model.schedules));
+        var subject = @Html.Raw(Json.Serialize(Model.Subject));
+
+        function filterStudents() {
+            if (typeof students === 'undefined' || !students.length) {
+                console.error("Students data is undefined or empty.");
+                return;
+            }
+
+            var classSelect = document.getElementById('class-select').value;
+            console.log("Selected class:", classSelect);
+
+            var studentsBody = document.getElementById('students-body');
+            var studentsTable = document.getElementById('students-table');
+            var noClassSelected = document.getElementById('no-class-selected');
+            var lessonSelect = document.getElementById('lesson-select');
+
+            var [classId, className] = classSelect.split(',');
+            console.log("Class ID:", classId, "Class Name:", className);
+
+            // Очистка таблиці учнів і випадаючого списку уроків
+            studentsBody.innerHTML = '';
+            lessonSelect.innerHTML = '<option value="">Виберіть урок</option>';
+
+            if (classId === '') {
+                studentsTable.style.display = 'none';
+                noClassSelected.style.display = 'block';
+            } else {
+                noClassSelected.style.display = 'none';
+                studentsTable.style.display = 'table';
+
+                // Фільтрація учнів за класом
+                var filteredStudents = students.filter(student => student.form === className);
+                if (filteredStudents.length === 0) {
+                    studentsBody.innerHTML = '<tr><td colspan="7">Учнів немає для цього класу</td></tr>';
+                } else {
+                    filteredStudents.forEach((student, index) => {
+                        var row = `
+                                <tr>
+                                    <td>${index + 1}</td>
+                                    <td>${student.surname_student} ${student.name_student}</td>
+                                    <td>
+                                        <select class="form-select">
+                                            <option value="present">Присутній</option>
+                                            <option value="absent">Відсутній</option>
+                                            <option value="excused">Відсутній з поважної причини</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select">
+                                            <option value="звичайна">Звичайна</option>
+                                            <option value="контрольна">Контрольна</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="form-select">
+                                            <option value="вивчено">Вивчено</option>
+                                            <option value="зараховано">Зараховано</option>
+                                            <option value="н/а">Н/а</option>
+                                        </select>
+                                    </td>
+                                    <td><input type="checkbox" /></td>
+                                    <td><input type="number" class="form-number" min="1" max="12" placeholder="Оцінка" /></td>
+                                </tr>
+                            `;
+                        studentsBody.innerHTML += row;
+                    });
+                }
+
+                // Фільтрація розкладу за класом і предметом
+                var filteredLessons = schedules.filter(schedule => schedule.class_id == classId && (
+                    (schedule.first_lesson && schedule.first_lesson.toLowerCase() === subject.toLowerCase()) ||
+                    (schedule.second_lesson && schedule.second_lesson.toLowerCase() === subject.toLowerCase()) ||
+                    (schedule.third_lesson && schedule.third_lesson.toLowerCase() === subject.toLowerCase()) ||
+                    (schedule.fourth_lesson && schedule.fourth_lesson.toLowerCase() === subject.toLowerCase()) ||
+                    (schedule.fifth_lesson && schedule.fifth_lesson.toLowerCase() === subject.toLowerCase())
+                ));
+
+                if (filteredLessons.length === 0) {
+                    lessonSelect.innerHTML = '<option value="">Немає доступних уроків</option>';
+                } else {
+                    filteredLessons.forEach(schedule => {
+                        lessonSelect.innerHTML += `
+                                <option value="${schedule.ID_schedule_day}">
+                                    Урок в ${schedule.day_name}
+                                </option>`;
+                    });
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
+

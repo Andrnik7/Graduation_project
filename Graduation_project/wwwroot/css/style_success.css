@@ -1,0 +1,40 @@
+﻿body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.success-message {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #218838; 
+}
+
+.verification-info {
+    font-size: 20px; 
+    margin-bottom: 30px; 
+    color: #333; 
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.link {
+    margin: 20px 0;
+    text-decoration: none;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+    .link:hover {
+        text-decoration: underline;
+        color: #0056b3;
+    }

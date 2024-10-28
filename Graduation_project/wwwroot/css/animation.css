@@ -1,0 +1,106 @@
+﻿@keyframes gradientAnimation {
+    0% {
+        background: linear-gradient(45deg, #c4f1ef, #d4f6e3);
+    }
+
+    16.67% {
+        background: linear-gradient(45deg, #b2f0d1, #d4f6e3); 
+    }
+
+    33.33% {
+        background: linear-gradient(45deg, #a0dfe5, #b2f0d1);
+    }
+
+    50% {
+        background: linear-gradient(45deg, #d4f6e3, #d1e6d6); 
+    }
+
+    83.33% {
+        background: linear-gradient(45deg, #d1e6d6, #c4f1ef); 
+    }
+
+    100% {
+        background: linear-gradient(45deg, #c4f1ef, #d4f6e3);
+    }
+}
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        animation: gradientAnimation 12s ease infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background-size: 400% 400%;
+    }
+
+    .form-container {
+        background-color: #ffffff;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        width: 400px;
+        z-index: 1;
+    }
+
+    .welcome-title {
+        color: #00796b;
+        margin-bottom: 20px;
+        font-size: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+        text-align: left;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #004d40;
+    }
+
+    .form-input, .form-select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #b2dfdb;
+        border-radius: 5px;
+        box-sizing: border-box;
+        background-color: #f1f8e9;
+        font-size: 14px;
+    }
+
+    .btn-submit {
+        background-color: #00796b;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        width: 100%;
+        transition: background-color 0.3s;
+    }
+
+    .btn-submit:hover {
+        background-color: #004d40;
+    }
+
+    .verification-info {
+        color: #004d40;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .icon-grade {
+        font-size: 100px;
+        color: rgba(0, 121, 107, 0.7);
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }

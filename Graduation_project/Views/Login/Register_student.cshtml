@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Реєстрація нового учня";
+}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/style_student_registration.css" />
+</head>
+<body>
+    <div class="registration-container">
+        <h1 class="registration-title">Реєстрація нового учня</h1>
+        <p class="registration-subtitle">Будь ласка, заповніть форму для реєстрації нового учня:</p>
+        <form method="post" asp-action="Register" asp-controller="Login">
+            <div class="form-group">
+                <label for="Name_student" class="form-label">Ім'я учня</label>
+                <input type="text" id="Name_student" name="Name_student" class="form-input" placeholder="Введіть ім'я учня" />
+            </div>
+
+            <div class="form-group">
+                <label for="Surname_student" class="form-label">Прізвище учня</label>
+                <input type="text" id="Surname_student" name="Surname_student" class="form-input" placeholder="Введіть прізвище учня" />
+            </div>
+
+            <div class="form-group">
+                <label for="Username" class="form-label">Логін</label>
+                <input type="text" id="Username" name="Username" class="form-input" placeholder="Введіть логін" />
+            </div>
+
+            <div class="form-group">
+                <label for="Password" class="form-label">Пароль</label>
+                <input type="password" id="Password" name="Password" class="form-input" placeholder="Введіть пароль" />
+            </div>
+
+            <div class="form-group">
+                <label for="Form" class="form-label">Клас</label>
+                <input type="text" id="Form" name="Form" class="form-input" placeholder="Введіть клас учня" />
+            </div>
+            <button type="submit" class="btn-submit">Зареєструвати учня</button>
+        </form>
+    </div>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

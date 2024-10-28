@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Щоденник учня</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #e0f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #00796b;
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #004d40;
+            color: white;
+        }
+
+        td {
+            background-color: #f1f8e9;
+            color: #00796b;
+        }
+
+        .grade-high {
+            color: #00796b;
+            font-weight: bold;
+        }
+
+        .grade-medium {
+            color: #e53935;
+            font-weight: bold;
+        }
+
+        .btn-show {
+            background-color: #00796b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .btn-show:hover {
+            background-color: #004d40;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>Щоденник учня</h1>
+            <div>
+                Дата з: <input type="date" value="2024-09-01">
+                Дата до: <input type="date" value="2024-10-01">
+                <button class="btn-show">Показати</button>
+            </div>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Предмет</th>
+                        <th>Вер 01</th>
+                        <th>Вер 02</th>
+                        <th>Вер 03</th>
+                        <th>Вер 04</th>
+                        <th>Вер 05</th>
+                        <th>Вер 06</th>
+                        <th>Вер 07</th>
+                        <th>Вер 08</th>
+                        <th>Вер 09</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Біологія</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="grade-high">12</span></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Всесвітня історія</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="grade-medium">10</span></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Географія</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><span class="grade-high">12</span></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
