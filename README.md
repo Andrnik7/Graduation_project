@@ -1,0 +1,1 @@
+This project involves the development of an electronic journal system using the ASP.NET framework and a relational database management system (such as SQL Server). The system enables teachers to record student attendance, grades, and comments digitally, while students and teachers can access this information online in real-time.
